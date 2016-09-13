@@ -3,6 +3,17 @@
 COMPILE_JOBS=4
 
 QT_CFG=''
+while [[ -n "$1" && "$1" == --* ]]; do		
+      arg="$1"		      
+      shift		     
+
+              SILENT=' -silent'		              
+              ;;
+
+(--qt-config)
+             QT_CFG+=" $1"
+				shift
+				;;
 QT_CFG+=' -opensource'          # Use the open-source license
 QT_CFG+=' -confirm-license'     # Silently acknowledge the license confirmation
 QT_CFG+=' -v'                   # Makes it easier to see what header dependencies are missing
@@ -18,7 +29,7 @@ else
     QT_CFG+=' -qpa'             # X11-less with QPA (aka Lighthouse)
 fi
 
-QT_CFG+=' -release'             # Build only for release (no debugging support)
+
 QT_CFG+=' -fast'                # Accelerate Makefiles generation
 QT_CFG+=' -nomake demos'        # Don't build with the demos
 QT_CFG+=' -nomake docs'         # Don't generate the documentatio
